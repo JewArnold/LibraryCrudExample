@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Данные о читателе</title>
+</head>
+
+<body>
+
+<h1>Информация о читателе</h1>
+<hr>
+<p th:text="${customer.getName() + ', ' + customer.birthYear}">VALUE</p>
+<br/>
+<hr>
+
+<p th:if="${not list.isEmpty()}">
+
+    <b> Список книг на руках у читателя:</b>
+
+<div th:each="book : ${list}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}"
+       th:text="'&quot' + ${book.getName()+'&quot' + ', ' + book.getYear()  + ', ' + book.getAuthor()}">user</a>
+</div>
+</p>
+
+
+<p th:if="${list.isEmpty()}">
+
+    <b>Список книг для данного человека пуст.<b/>
+<p>
+
+
+<hr>
+<br/>
+
+<form th:method="GET" th:action="@{/customers/{id}/edit(id=${customer.getId()})}">
+    <input type="submit" value="Редактировать данные читателя"/>
+</form>
+<form th:method="DELETE" th:action="@{/customers/{id}(id=${customer.getId()})}">
+    <input type="submit" value="Удалить читателя из базы данных"/>
+</form>
+<br/>
+<hr>
+<a th:href="@{/customers}"
+   th:text="'Показать список всех читателей----->'">customers</a>
+</body>
+</html>

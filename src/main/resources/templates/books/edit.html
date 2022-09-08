@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" , xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editing</title>
+</head>
+<body>
+<h1>Редактировать данные для книги</h1>
+<hr>
+<p th:text="'Введите новые данные для книги &quot'+ ${book.getName()}+ '&quot:'">VALUE</p>
+
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+
+    <label for="name">Название: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br/>
+
+    <label for="author">Автор: </label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
+    <br/>
+
+    <label for="year">Год выпуска: </label>
+    <input type="text" th:field="*{year}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year Error</div>
+    <br/>
+
+
+    <br/>
+    <hr>
+    <br/>
+    <input type="submit" value="Подтвердить"/>
+</form>
+<br/>
+
+<a th:href="@{/books}"
+   th:text="'Показать список всех книг'">books</a>
+
+
+</body>
+</html>
